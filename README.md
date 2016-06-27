@@ -17,6 +17,6 @@
 - GUI made with Java Swing;
 
 ##HTML-CSS website##
-- Responsive website made with HTML and CSS3
-- Some animations implemented with CSS3
-- School project
+- Responsive website made with HTML and CSS3;
+- Some animations implemented with CSS3;
+- School project;
