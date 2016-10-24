@@ -16,6 +16,9 @@
 - Take as input the url of the file to download;
 - GUI made with Java Swing;
 
+##Haskell-Labs##
+- Exercises in Haskell
+
 ##HTML-CSS website##
 - Responsive website made with HTML and CSS3;
 - Some animations implemented with CSS3;
