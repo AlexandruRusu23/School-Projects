@@ -1,1 +1,1 @@
-# Contacts Agenda using JavaServlets and MySQL database #
+# Contacts Agenda implemented using JavaServlets and MySQL database #
