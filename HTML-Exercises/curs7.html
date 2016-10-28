@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="curs7.js"></script>
+	<style type="text/css">
+		#ascuns {display: hidden;}
+	</style>
+	<title>Curs 7</title>
+</head>
+<body>
+
+	<form  id="citire" > 
+		<label>Numar <input  type="text" id="nr"></label>  
+		<button type="submit"> Trimite </button> 
+	</form>
+
+	<form name="quiz" id="quiz">
+		<fieldset><legend> 3+5=? </legend>
+			<input type="radio" name="q1" value="0">10<br>
+			<input type="radio" name="q1" value="1">8 <br>
+			<input type="radio" name="q1" value="0">55<br>
+		</fieldset>
+
+ 		<fieldset><legend> 3*5=? </legend>
+			<input type="radio" name="q2" value="0">10<br>
+			<input type="radio" name="q2" value="1">15 <br>
+			<input type="radio" name="q2" value="0">55<br>
+		</fieldset> 
+		<button type="submit" id="buton"> Click me </button>
+	</form>
+
+	<form id = "myform" target="myiframe">
+		<p><textarea name="comments" id ="tta" rows="5" cols="20"> Aici e un textarea </textarea></p>
+		<p><label>Username <input type="text" name="Username"></label></p>
+		<p><label>Parola <input type="password" name="Parola" maxlength="10"></label></p>
+		<p><label>Ataseaza fisier <input type="file" name="fileField"> </label></p>
+		<fieldset> <legend>Gust</legend>
+			<p><label><input type="radio" name="gust" value="iute"> iute </label></p>
+			<p><label><input type="radio" name="gust" value="dulce">dulce</label></p>
+		</fieldset>
+		<fieldset><legend>Topping</legend>
+			<p><label><input type="checkbox" name="topping1" value="rosii"> rosii</label></p>
+			<p><label><input type="checkbox" name="topping2" value="branza">branza</label></p>
+		</fieldset>
+		<select name="optional">
+			<option value="PL"> PL </option>
+			<option value="TW">TW </option>
+			<option value="MFL">MFL</option>
+		</select>
+
+		<p><input type = "submit" value="Trimite cu tag input"></p>
+
+	</form>
+
+	<button type = "submit" form = "myform">Submit cu tag button</button>
+
+	<div id="ascuns">   
+		<iframe name="myiframe"></iframe>
+	</div>
+
+
+</body>
+</html>

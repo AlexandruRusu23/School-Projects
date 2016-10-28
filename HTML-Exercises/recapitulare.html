@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+
+window.onload = function(){
+var b = document.getElementsByTagName("body");
+var p = b[0].firstElementChild.nextElementSibling; 
+ //alert(p.nodeName);
+ var x = p.firstElementChild;
+ //alert(x.innerHTML);
+
+var d = document.getElementById("aux");   
+    d.insertAdjacentHTML("beforeend","<p> hello </p>");  
+    var p1 = d.lastChild; //alert(p1.nodeName); 
+    var t = p1.firstChild; //alert(t.nodeType);alert(t.nodeValue);
+
+var continut = [ '<ul class="myclass">',
+	'<li class="item">item1</li>',
+ 	'<li class="item">item2</li>', 
+	'<li class="item">item3</li>', 
+	'<li class="item">item4</li>', 
+	'<li class="item">item5</li>', 
+	'</ul>' ].join("");
+
+	p.innerHTML = continut;
+
+	var newP = document.createElement("p");
+	var newText = "Text creat cu JS";
+	var newT = document.createTextNode(newText);
+
+	newP.appendChild(newT);
+	var ob = document.getElementById("new");
+	ob.appendChild(newP);
+}
+
+  </script>
+	<title>Recap </title>
+</head>
+<body>
+<p class="par"> Continutul paragrafului </p>
+<label><div class="par2"> Continutul paragrafului </div></label>
+
+<div id="aux"></div>
+
+<div id="new"> </div>
+
+</body>
+</html>
