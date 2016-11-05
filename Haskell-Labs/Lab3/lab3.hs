@@ -53,7 +53,7 @@ decipherStr n str = [ decipher n c | c <- str ]
 
 -- 10.
 prop_cipher :: Int -> String -> Bool
-prop_cipher = undefined
+prop_cipher n str = decipherStr n (encipherStr n str) == str
 
 -- 11.
 contains :: String -> String -> Bool

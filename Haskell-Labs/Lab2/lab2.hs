@@ -17,7 +17,9 @@ halveEvens xs = [div x 2 | x <- xs, even x]
 -- Recursive version
 halveEvensRec :: [Int] -> [Int]
 halveEvensRec [] = []
-halveEvensRec (x:xs) | even x = (div x 2) : halveEvensRec xs | otherwise = halveEvensRec xs
+halveEvensRec (x:xs) 
+  | even x = div x 2 : halveEvensRec xs 
+  | otherwise = halveEvensRec xs
 
 -- Mutual test
 prop_halveEvens :: [Int] -> Bool
@@ -29,12 +31,14 @@ prop_halveEvens xs = halveEvens xs == halveEvensRec xs
 
 -- List-comprehension version
 inRange :: Int -> Int -> [Int] -> [Int]
-inRange lo hi xs = [x | x<-xs, and [x <= hi, x>= lo] ]
+inRange lo hi xs = [x | x <- xs, x <= hi && x >= lo]
 
 -- Recursive version
 inRangeRec :: Int -> Int -> [Int] -> [Int]
 inRangeRec lo hi [] = []
-inRangeRec lo hi (x:xs) | (x <= hi && x >= lo) = x : inRangeRec lo hi xs | otherwise = inRangeRec lo hi xs
+inRangeRec lo hi (x:xs) 
+  | (x <= hi && x >= lo) = x : inRangeRec lo hi xs 
+  | otherwise = inRangeRec lo hi xs
 
 -- Mutual test
 prop_inRange :: Int -> Int -> [Int] -> Bool
@@ -46,12 +50,14 @@ prop_inRange lo hi xs = inRange lo hi xs == inRangeRec lo hi xs
 
 -- List-comprehension version
 countPositives :: [Int] -> Int
-countPositives xs = length [ x | x <- xs, x > 0]
+countPositives xs = length [x | x <- xs, x > 0]
 
 -- Recursive version
 countPositivesRec :: [Int] -> Int
 countPositivesRec [] = 0
-countPositivesRec (x:xs) | (x > 0) = 1 + countPositivesRec xs | otherwise = countPositivesRec xs
+countPositivesRec (x:xs) 
+  | (x > 0) = 1 + countPositivesRec xs 
+  | otherwise = countPositivesRec xs
 
 -- Mutual test
 prop_countPositives :: [Int] -> Bool
@@ -63,16 +69,18 @@ prop_countPositives xs =  countPositives xs == countPositivesRec xs
 
 -- Helper function
 discount :: Int -> Int
-discount x = x - (div x 10)
+discount x = round(fromIntegral x/100 - (fromIntegral x/100)/10)
 
 -- List-comprehension version
 pennypincher :: [Int] -> Int
-pennypincher xs = sum [discount x | x <- xs, (discount x) <= 19900]
+pennypincher xs = sum [(discount x)*100 | x <- xs, discount x <= 199]
 
 -- Recursive version
 pennypincherRec :: [Int] -> Int
 pennypincherRec [] = 0
-pennypincherRec (x:xs) = discount x + pennypincherRec xs
+pennypincherRec (x:xs)
+  | discount x <= 199 = (discount x)*100 + pennypincherRec xs
+  | otherwise = pennypincherRec xs
 
 -- Mutual test
 prop_pennypincher :: [Int] -> Bool
@@ -89,7 +97,9 @@ multDigits str = product [ digitToInt x | x <- str, isDigit x ]
 -- Recursive version
 multDigitsRec :: String -> Int
 multDigitsRec [] = 1
-multDigitsRec (x:str) | ( isDigit x ) = (digitToInt x ) * multDigitsRec str | otherwise = 1 * multDigitsRec str
+multDigitsRec (x:str) 
+  | isDigit x = digitToInt x * multDigitsRec str 
+  | otherwise = 1 * multDigitsRec str
 
 -- Mutual test
 prop_multDigits :: String -> Bool
@@ -102,7 +112,7 @@ prop_multDigits str = multDigits str == multDigitsRec str
 -- List-comprehension version
 capitalise :: String -> String
 capitalise "" = ""
-capitalise (x:str) = toUpper x : [ toLower x | x <- str]
+capitalise (x:str) = toUpper x : [toLower x | x <- str]
 
 -- Recursive version
 toLowerFunc :: String -> String
@@ -120,14 +130,23 @@ prop_capitalise str = capitalise str == capitaliseRec str
 
 -- 7. title
 
+-- aux Funct
+correctForm :: String -> String
+correctForm x
+  | length x >= 4 = capitalise x
+  | otherwise = toLowerFunc x
+
 -- List-comprehension version
 title :: [String] -> [String]
-title vectStr = [capitalise str | str <- vectStr] 
+title [] = []
+title (x:xs) = capitalise x : [correctForm w | w <- xs] 
 
 -- Recursive version
 titleRec :: [String] -> [String]
 titleRec [] = []
-titleRec (str:vectStr) = capitaliseRec str : titleRec vectStr
+titleRec (str:vectStr) = capitaliseRec str : correctRec vectStr
+  where correctRec [] = [] 
+        correctRec (w:ws) = correctForm w : correctRec ws
 
 -- mutual test
 prop_title :: [String] -> Bool
